@@ -1,0 +1,68 @@
+.TH KERO 1 "2026-11-17" "Kero 2.1.35" "User Commands"
+.SH NAME
+kero \- terminal sessions that keep running, for you and your agents
+.SH SYNOPSIS
+.B kero
+.br
+.B kero
+\fICOMMAND\fR [\fIOPTIONS\fR] [\fITARGET\fR] [\fIARGS\fR]
+.SH DESCRIPTION
+Kero is a terminal app whose sessions live in a background process (\fBkerod\fR) and keep
+running when the window closes. Run without arguments, \fBkero\fR opens the app. The commands
+below start, drive and read sessions and panes from a shell, so that scripts and coding agents
+can use them. A \fITARGET\fR is a session or pane id; by default it is the pane the command runs
+in (\fI$KERO_PANE\fR). The full text for every command is printed by \fBkero \-\-help\fR.
+.SH COMMANDS
+.TP
+.BR ls " [\fB\-\-json\fR] [\fB\-a\fR]"
+List sessions and their panes.
+.TP
+.BR new " [\fB\-p\fR \fIPROJECT\fR] [\fB\-n\fR \fINAME\fR] [\fB\-d\fR \fIDIR\fR] [\fB\-f\fR] [\fB\-w\fR] [\fB\-u\fR \fIURL\fR] [\fB\-\-worktree\fR \fIBRANCH\fR] [\fB\-\-\fR \fICMD\fR...]"
+Start a session and print its id.
+.TP
+.BR split " [\fITARGET\fR] [\fB\-\-right\fR|\fB\-\-down\fR|\fB\-\-left\fR|\fB\-\-up\fR] [\fB\-r\fR \fIRATIO\fR] [\fB\-\-\fR \fICMD\fR...]"
+Start a pane beside a pane and print its id.
+.TP
+.BR send " \fITARGET\fR \fITEXT\fR...,  " key " \fITARGET\fR \fIKEY\fR..."
+Type text into a pane, or press keys.
+.TP
+.BR prompt " \fITARGET\fR \fITEXT\fR..."
+Send text and Enter, wait until the pane stops working, then print its screen.
+.TP
+.BR read " [\fITARGET\fR] [\fB\-a\fR] [\fB\-n\fR \fILINES\fR]"
+Print a pane's screen.
+.TP
+.BR wait " [\fITARGET\fR] [\fB\-\-for\fR \fISTATUSES\fR] [\fB\-\-timeout\fR \fIDUR\fR]"
+Wait until a pane stops working or reaches a status.
+.TP
+.BR events ", " status ", " diff
+Watch events, print status, or show the changes in a pane's git worktree.
+.TP
+.B browser
+Drive a browser pane (needs Remote Control, in Settings \(rg Agents).
+.TP
+.BR history ", " resume
+List the conversations agents ran in panes, and resume one.
+.TP
+.BR rename ", " focus ", " close ", " restart ", " notify ", " report
+Manage and report on sessions and panes.
+.TP
+.BR do ", " actions
+Run an app action, as its menus do, and list them.
+.TP
+.BR config " {path|show|edit|check}"
+Work with the configuration file.
+.TP
+.BR projects ", " hosts ", " clients ", " skill
+Projects, other machines Kero reaches, connected clients, and teaching coding agents to use
+\fBkero\fR.
+.SH ENVIRONMENT
+.TP
+.B KERO_SESSION, KERO_PANE
+Set inside every pane; the default target.
+.SH FILES
+.TP
+.I /Applications/Kero.app
+The application; \fI/usr/local/bin/kero\fR is a symlink to its executable.
+.SH SEE ALSO
+Online documentation: \fIdocs/cli.md\fR in the source tree.
